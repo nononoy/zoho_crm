@@ -57,7 +57,7 @@ module ZohoCrm::Util
 
   def build_url(method_name)
     action = method_name.to_s.camelize(:lower).sub(/Pdc$/, "PDC")
-    "https://crm.zoho.com/crm/private/json/#{zoho_module_name}/#{action}"
+    zoho_crm_host + "/crm/private/json/#{zoho_module_name}/#{action}"
   end
 
   def build_query(params)
@@ -162,4 +162,7 @@ module ZohoCrm::Util
     end
   end
 
+  def zoho_crm_host
+    ZohoCrm.host || 'https://crm.zoho.com'
+  end
 end
