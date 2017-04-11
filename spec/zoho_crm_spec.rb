@@ -36,6 +36,22 @@ describe ZohoCrm::Util do
     end
   end
 
+  describe "#zoho_crm_host" do
+    context "when host is not set" do
+      it "should equals to .com" do
+        expect(z.zoho_crm_host).to eq 'https://crm.zoho.com'
+      end
+    end
+
+    context "when host is set" do
+      let(:host) { "https://crm.zoho.eu" }
+      before { ZohoCrm.host = host }
+      it "should equals to preset value" do
+        expect(z.zoho_crm_host).to eq 'https://crm.zoho.eu'
+      end
+    end
+  end
+
   describe "#build_query" do
     let(:token) { "hogehogehoge" }
     let(:predefined_query) { {"scope" => "crmapi", "authtoken" => token} }
