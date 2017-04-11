@@ -52,12 +52,13 @@ You can get the token to use Zoho CRM API from the "Zoho CRM API" section availa
 
 https://crm.zoho.com/crm/ShowSetup.do?tab=developerSpace&subTab=api
 
-### Setup Token
+### Setup Token and Host
 
 Before accessing Zoho data, you must first configure the access token.
 
     require "zoho_crm"
     ZohoCrm.token = "xxxxxxxxxxxxxxxx"
+    ZohoCrm.host = "https://crm.zoho.eu" (optional, "https://crm.zoho.com" - default)
 
 ### Reading Data
 
