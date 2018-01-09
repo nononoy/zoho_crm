@@ -22,7 +22,7 @@ module ZohoCrm::Util
   end
 
   def execute(http_method, url, params)
-    check_token
+    check_token unless params[:api_key]
 
     query = build_query(params)
 
@@ -55,14 +55,14 @@ module ZohoCrm::Util
     end
   end
 
-  def build_url(method_name)
+  def build_url(method_name, params = {})
     action = method_name.to_s.camelize(:lower).sub(/Pdc$/, "PDC")
-    zoho_crm_host + "/crm/private/json/#{zoho_module_name}/#{action}"
+    zoho_crm_host(params) + "/crm/private/json/#{zoho_module_name}/#{action}"
   end
 
   def build_query(params)
     query = Hash[params.map { |k, v| [k.to_s.camelize(:lower), v] }].merge(
-      "authtoken" => ZohoCrm.token,
+      "authtoken" => params[:api_key] || ZohoCrm.token,
       "scope" => "crmapi",
     )
 
@@ -162,7 +162,7 @@ module ZohoCrm::Util
     end
   end
 
-  def zoho_crm_host
-    ZohoCrm.host || 'https://crm.zoho.com'
+  def zoho_crm_host(params = {})
+    params[:host] || ZohoCrm.host || 'https://crm.zoho.com'
   end
 end

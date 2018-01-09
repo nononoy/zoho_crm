@@ -29,23 +29,23 @@
         get_related_records
       ].each do |method_name|
         define_method(method_name) do |params = {}|
-          url = build_url(__method__)
+          url = build_url(__method__, params)
           fetch(url, params)
         end
       end
 
       def insert_records(params = {})
-        url = build_url(__method__)
+        url = build_url(__method__, params)
         insert(url, params)
       end
 
       def update_records(params = {})
-        url = build_url(__method__)
+        url = build_url(__method__, params)
         update(url, params)
       end
 
       def delete_records(params = {})
-        url = build_url(__method__)
+        url = build_url(__method__, params)
         delete(url, params)
       end
     end
