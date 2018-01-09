@@ -60,6 +60,10 @@ Before accessing Zoho data, you must first configure the access token.
     ZohoCrm.token = "xxxxxxxxxxxxxxxx"
     ZohoCrm.host = "https://crm.zoho.eu" (optional, "https://crm.zoho.com" - default)
 
+Or you can set token and host dynamically per request
+
+    require "zoho_crm"
+    ZohoCrm::Potential.get_record_by_id(id: 1, api_key: 'xxxxxxxxxxxxxxxx', host: 'https://crm.zoho.com')
 ### Reading Data
 
 This gem supports below methods:
